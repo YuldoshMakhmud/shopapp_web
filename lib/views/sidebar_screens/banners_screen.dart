@@ -5,7 +5,6 @@ import 'package:firebaseshop_web/views/widget/banner_list_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 
-
 class UploadBannerScreen extends StatefulWidget {
   static const String id = '\banners';
   const UploadBannerScreen({super.key});
@@ -51,30 +50,29 @@ class _UploadBannerScreenState extends State<UploadBannerScreen> {
 
   uploadToFirebase() async {
     if (_image != null) {
-        EasyLoading.show(status: 'Saving...');
-        try {
-          String imageUrl = await _uploadImageToStorage(_image);
+      EasyLoading.show(status: 'Saving...');
+      try {
+        String imageUrl = await _uploadImageToStorage(_image);
 
-          String safeDocName = fileName!
-              .replaceAll(RegExp(r'[^\w\s]+'), '')
-              .replaceAll(' ', '_');
+        String safeDocName = fileName!
+            .replaceAll(RegExp(r'[^\w\s]+'), '')
+            .replaceAll(' ', '_');
 
-          await _firestore.collection('banners').doc(safeDocName).set({
-            'image': imageUrl,
-           
-          });
+        await _firestore.collection('banners').doc(safeDocName).set({
+          'image': imageUrl,
+        });
 
-          EasyLoading.showSuccess('Banner Saved!');
-          setState(() {
-            _formKey.currentState!.reset();
-            _image = null;
-          });
-        } catch (e) {
-          EasyLoading.showError('Error: $e');
-        }
-      } else {
-        EasyLoading.showError('Please select an image');
+        EasyLoading.showSuccess('Banner Saved!');
+        setState(() {
+          _formKey.currentState!.reset();
+          _image = null;
+        });
+      } catch (e) {
+        EasyLoading.showError('Error: $e');
       }
+    } else {
+      EasyLoading.showError('Please select an image');
+    }
   }
 
   @override
@@ -88,10 +86,7 @@ class _UploadBannerScreenState extends State<UploadBannerScreen> {
               padding: EdgeInsets.all(10),
               child: Text(
                 'Banners',
-                style: TextStyle(
-                  fontWeight: FontWeight.w700,
-                  fontSize: 36,
-                ),
+                style: TextStyle(fontWeight: FontWeight.w700, fontSize: 36),
               ),
             ),
             const Divider(color: Colors.grey),
@@ -112,9 +107,10 @@ class _UploadBannerScreenState extends State<UploadBannerScreen> {
                             borderRadius: BorderRadius.circular(8),
                           ),
                           child: Center(
-                            child: _image != null
-                                ? Image.memory(_image, fit: BoxFit.cover)
-                                : const Text('No Image'),
+                            child:
+                                _image != null
+                                    ? Image.memory(_image, fit: BoxFit.cover)
+                                    : const Text('No Image'),
                           ),
                         ),
                         const SizedBox(height: 10),
@@ -131,7 +127,7 @@ class _UploadBannerScreenState extends State<UploadBannerScreen> {
                       ],
                     ),
                     const SizedBox(width: 30),
-                   
+
                     const SizedBox(width: 30),
                     ElevatedButton(
                       style: ElevatedButton.styleFrom(
@@ -162,14 +158,11 @@ class _UploadBannerScreenState extends State<UploadBannerScreen> {
               padding: EdgeInsets.all(10),
               child: Text(
                 'Banner List',
-                style: TextStyle(
-                  fontWeight: FontWeight.w700,
-                  fontSize: 30,
-                ),
+                style: TextStyle(fontWeight: FontWeight.w700, fontSize: 30),
               ),
             ),
             const SizedBox(height: 15),
-          UploadBannerList(),
+            UploadBannerList(),
           ],
         ),
       ),

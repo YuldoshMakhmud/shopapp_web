@@ -5,7 +5,6 @@ import 'package:firebaseshop_web/views/widget/category_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 
-
 class CategoriesScreen extends StatefulWidget {
   static const String id = '\categoryScreen';
   const CategoriesScreen({super.key});
@@ -41,7 +40,10 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
         .replaceAll(RegExp(r'[^\w\s]+'), '') // belgilarni olib tashlash
         .replaceAll(' ', '_'); // bo‘sh joylarni _ bilan almashtirish
 
-    Reference ref = _firebaseStorage.ref().child('categories').child(safeFileName);
+    Reference ref = _firebaseStorage
+        .ref()
+        .child('categories')
+        .child(safeFileName);
 
     UploadTask uploadTask = ref.putData(image!);
     TaskSnapshot snap = await uploadTask;
@@ -93,10 +95,7 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
               padding: EdgeInsets.all(10),
               child: Text(
                 'Categories',
-                style: TextStyle(
-                  fontWeight: FontWeight.w700,
-                  fontSize: 36,
-                ),
+                style: TextStyle(fontWeight: FontWeight.w700, fontSize: 36),
               ),
             ),
             const Divider(color: Colors.grey),
@@ -117,9 +116,10 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
                             borderRadius: BorderRadius.circular(8),
                           ),
                           child: Center(
-                            child: _image != null
-                                ? Image.memory(_image, fit: BoxFit.cover)
-                                : const Text('No Image'),
+                            child:
+                                _image != null
+                                    ? Image.memory(_image, fit: BoxFit.cover)
+                                    : const Text('No Image'),
                           ),
                         ),
                         const SizedBox(height: 10),
@@ -183,10 +183,7 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
               padding: EdgeInsets.all(10),
               child: Text(
                 'Category List',
-                style: TextStyle(
-                  fontWeight: FontWeight.w700,
-                  fontSize: 30,
-                ),
+                style: TextStyle(fontWeight: FontWeight.w700, fontSize: 30),
               ),
             ),
             const SizedBox(height: 15),
