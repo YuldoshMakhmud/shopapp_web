@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 
 class CategoriesScreen extends StatefulWidget {
-  static const String id = '\categoryScreen';
+  static const String id = 'categoryScreen';
   const CategoriesScreen({super.key});
 
   @override

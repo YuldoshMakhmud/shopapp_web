@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:uuid/uuid.dart';
 
 class ProductScreen extends StatefulWidget {
-  static const String id = '\productscreen';
+  static const String id = 'productscreen';
   const ProductScreen({super.key});
 
   @override
@@ -19,6 +19,7 @@ class _ProductScreenState extends State<ProductScreen> {
   final FirebaseStorage _firebaseStorage = FirebaseStorage.instance;
   final TextEditingController _sizeController = TextEditingController();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+   bool _isLoading = false;
   final List<String> _sizeList = [];
   final List<String> _categoryList = [];
   final List<String> _imagesUrls = [];
@@ -84,6 +85,9 @@ class _ProductScreenState extends State<ProductScreen> {
 //function upload products to cloud
 
 uploadData()async{
+  setState(() {
+    _isLoading =true;
+  });
   await uploadImageTostorage();
   if(_imagesUrls.isNotEmpty){
     final productId = Uuid().v4();
@@ -98,6 +102,13 @@ uploadData()async{
         'productImages': _imagesUrls,
         'quantity': quantity,
   
+    }).whenComplete((){
+      setState(() {
+          _formKey.currentState!.reset();
+        _imagesUrls.clear();
+        _images.clear();
+        _isLoading =false;
+      });
     });
   }
 }
@@ -358,7 +369,7 @@ uploadData()async{
                     color: Colors.blue,
                     borderRadius: BorderRadius.circular(9),
                   ),
-                  child: Center(
+                  child: _isLoading?CircularProgressIndicator(color: Colors.white,): Center(
                     child: Text(
                       'Upload Product',
                       style: TextStyle(

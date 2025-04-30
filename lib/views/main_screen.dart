@@ -75,7 +75,7 @@ class _MainScreenState extends State<MainScreen> {
           width: double.infinity,
           child: const Center(
             child: Text(
-              'TrendlyBuy Admin',
+              'Multy vendor Admin',
               style: TextStyle(
                 fontSize: 14,
                 fontWeight: FontWeight.bold,
