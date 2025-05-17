@@ -33,7 +33,7 @@ class _MainScreenState extends State<MainScreen> {
 
       case OrderScreen.id:
         setState(() {
-          _selectedScreen = const OrderScreen();
+          _selectedScreen =  OrderScreen();
         });
         break;
 

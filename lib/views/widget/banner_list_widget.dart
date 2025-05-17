@@ -46,21 +46,19 @@ class UploadBannerList extends StatelessWidget {
 
               return Padding(
                 padding: const EdgeInsets.all(15.0),
-                child: Container(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      SizedBox(
-                        height: 100,
-                        width: 100,
-                        child: Image.network(
-                          data['image'],
-                          width: double.infinity,
-                          fit: BoxFit.fitWidth,
-                        ),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    SizedBox(
+                      height: 100,
+                      width: 100,
+                      child: Image.network(
+                        data['image'],
+                        width: double.infinity,
+                        fit: BoxFit.fitWidth,
                       ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
               );
             });

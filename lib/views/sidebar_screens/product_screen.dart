@@ -40,7 +40,7 @@ class _ProductScreenState extends State<ProductScreen> {
       type: FileType.image,
     );
     if (pickedImages == null) {
-      print('No Image Picked');
+    debugPrint('No Image Picked');
     } else {
       setState(() {
         for (var file in pickedImages.files) {
@@ -71,7 +71,7 @@ class _ProductScreenState extends State<ProductScreen> {
 
  uploadImageTostorage() async {
     for (var img in _images) {
-      Reference ref = _firebaseStorage.ref().child('productImages').child(Uuid().v4());
+      Reference ref = _firebaseStorage.ref().child('productImage').child(Uuid().v4());
 
       await ref.putData(img).whenComplete(() async {
         await ref.getDownloadURL().then((value) {
@@ -99,7 +99,7 @@ uploadData()async{
         'productPrice': productPrice,
         'discount': discount,
         'description': description,
-        'productImages': _imagesUrls,
+        'productImage': _imagesUrls,
         'quantity': quantity,
   
     }).whenComplete((){
@@ -356,10 +356,10 @@ uploadData()async{
                   if (_formKey.currentState!.validate()) {
                     // upload product to cloud firestore
                     uploadData();
-                    print('uploaded');
+                    debugPrint('uploaded');
                   } else {
                     // please fill in all fielads
-                    print('bad status');
+                    debugPrint('bad status');
                   }
                 },
                 child: Container(
